@@ -65,6 +65,8 @@ curl -X POST http://localhost:8000/auth/register \
 
 You can also create an account directly from the frontend sign-up form.
 
+**Password rules:** 8–72 characters (bcrypt truncates anything longer, so keep it within that range).
+
 ## Project layout
 ```
 backend/        FastAPI application code

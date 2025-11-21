@@ -83,8 +83,9 @@ const RegisterForm = ({ onSuccess, onSwitchMode }: RegisterFormProps) => {
           id="password"
           name="password"
           type="password"
-          placeholder="At least 8 characters"
+          placeholder="8-72 characters"
           minLength={8}
+          maxLength={72}
           value={formData.password}
           onChange={handleChange}
           required

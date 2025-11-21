@@ -71,6 +71,8 @@ const LoginForm = ({ onSuccess, onSwitchMode }: LoginFormProps) => {
           placeholder="••••••••"
           value={formData.password}
           onChange={handleChange}
+          minLength={8}
+          maxLength={72}
           required
         />
       </div>
