@@ -10,6 +10,7 @@ def get_user_by_email(db: Session, email: str) -> models.User | None:
 
 
 def create_user(db: Session, user_in: schemas.UserCreate) -> models.User:
+    print(user_in.password)
     db_user = models.User(
         email=user_in.email,
         full_name=user_in.full_name,

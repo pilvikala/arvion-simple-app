@@ -37,6 +37,7 @@ Backend:
 ```bash
 python -m venv .venv
 source .venv/bin/activate
+source .env.local
 pip install -r backend/requirements.txt
 uvicorn app.main:app --app-dir backend --reload
 ```
@@ -65,7 +66,7 @@ curl -X POST http://localhost:8000/auth/register \
 
 You can also create an account directly from the frontend sign-up form.
 
-**Password rules:** 8–72 characters (bcrypt truncates anything longer, so keep it within that range).
+**Password rules:** Minimum 8 characters. We now use PBKDF2, so long passphrases remain fully intact (legacy bcrypt hashes continue to verify).
 
 ## Project layout
 ```
