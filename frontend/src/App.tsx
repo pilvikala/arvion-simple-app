@@ -30,6 +30,7 @@ type AuthMode = 'login' | 'signup'
 type TestResult = { ok: boolean; message: string }
 
 const defaultQuery = 'SELECT version();'
+const AUTH_STORAGE_KEY = 'authState'
 
 function App() {
   const [authState, setAuthState] = useState<LoginResponse | null>(null)
@@ -61,6 +62,32 @@ function App() {
   const [queryError, setQueryError] = useState<string | null>(null)
   const [queryResult, setQueryResult] = useState<SqlQueryResult | null>(null)
   const [logoutInProgress, setLogoutInProgress] = useState(false)
+
+  // Restore persisted auth state on first load
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(AUTH_STORAGE_KEY)
+      if (stored) {
+        const parsed = JSON.parse(stored) as LoginResponse
+        if (parsed && parsed.user) {
+          setAuthState(parsed)
+        } else {
+          localStorage.removeItem(AUTH_STORAGE_KEY)
+        }
+      }
+    } catch {
+      localStorage.removeItem(AUTH_STORAGE_KEY)
+    }
+  }, [])
+
+  // Keep auth state in localStorage in sync
+  useEffect(() => {
+    if (authState) {
+      localStorage.setItem(AUTH_STORAGE_KEY, JSON.stringify(authState))
+    } else {
+      localStorage.removeItem(AUTH_STORAGE_KEY)
+    }
+  }, [authState])
 
   const refreshConnections = useCallback(async () => {
     setConnectionsLoading(true)
@@ -365,8 +392,7 @@ function App() {
     setEditTesting(false)
     setFormSubmitting(false)
     setFormTesting(false)
-    localStorage.removeItem('authToken')
-    sessionStorage.removeItem('authToken')
+    localStorage.removeItem(AUTH_STORAGE_KEY)
     setLogoutInProgress(false)
   }
 
@@ -419,6 +445,7 @@ function App() {
           <LoginForm
             onSuccess={(payload) => {
               setAuthState(payload)
+              setActivePage('sql')
             }}
             onSwitchMode={() => setAuthMode('signup')}
           />
@@ -426,6 +453,7 @@ function App() {
           <RegisterForm
             onSuccess={(payload) => {
               setAuthState(payload)
+              setActivePage('sql')
             }}
             onSwitchMode={() => setAuthMode('login')}
           />
