@@ -1,6 +1,6 @@
-# Simple Web App
+# Simple SQL Console App
 
-Full-stack starter with a FastAPI backend, Postgres database, and React (Vite + TypeScript) frontend featuring a login flow.
+This is an intentionally vulnerable app.
 
 ## Stack
 - **Backend:** FastAPI, SQLAlchemy, Passlib
