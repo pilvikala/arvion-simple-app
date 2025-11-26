@@ -1,51 +1,38 @@
-.app-shell {
+.auth-shell {
   min-height: 100vh;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 3rem;
   padding: 4rem clamp(1.5rem, 4vw, 5rem);
-  background: radial-gradient(circle at 20% 20%, #fcd34d55, transparent 50%),
-    radial-gradient(circle at 80% 0%, #818cf855, transparent 45%),
+  background: radial-gradient(circle at 20% 20%, #fcd34d33, transparent 50%),
+    radial-gradient(circle at 80% 0%, #818cf833, transparent 45%),
     #0f172a;
   color: #f8fafc;
 }
 
-.hero {
+.auth-hero {
   max-width: 520px;
 }
 
-.hero .eyebrow {
-  letter-spacing: 0.2em;
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  color: #cbd5f5;
-  margin-bottom: 0.5rem;
-}
-
-.hero h1 {
+.auth-hero h1 {
   font-size: clamp(2rem, 5vw, 3.5rem);
   margin-bottom: 1rem;
 }
 
-.hero .subhead {
-  font-size: 1.1rem;
-  color: #cbd5f5;
-}
-
-.hero ul {
+.auth-hero ul {
   list-style: none;
   padding: 0;
   margin-top: 2rem;
 }
 
-.hero li {
+.auth-hero li {
   position: relative;
   padding-left: 1.5rem;
   margin-bottom: 0.75rem;
   color: #e2e8f0;
 }
 
-.hero li::before {
+.auth-hero li::before {
   content: '';
   width: 0.5rem;
   height: 0.5rem;
@@ -62,6 +49,9 @@
   border-radius: 1.25rem;
   padding: 2rem;
   box-shadow: 0 30px 60px rgba(15, 23, 42, 0.6);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
 }
 
 .auth-panel header h2 {
@@ -70,8 +60,29 @@
 }
 
 .auth-panel header p {
-  margin: 0 0 1.5rem;
+  margin: 0;
   color: #cbd5f5;
+}
+
+.auth-toggle {
+  display: flex;
+  border: 1px solid rgba(226, 232, 240, 0.2);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.auth-toggle button {
+  flex: 1;
+  background: transparent;
+  padding: 0.65rem 1rem;
+  font-weight: 600;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.auth-toggle button.active {
+  background: rgba(99, 102, 241, 0.3);
 }
 
 .login-form {
@@ -86,20 +97,135 @@
   gap: 0.35rem;
 }
 
+.text-button {
+  background: none;
+  border: none;
+  color: #22d3ee;
+  font: inherit;
+  padding: 0;
+  cursor: pointer;
+}
+
+.text-button:focus {
+  outline: 2px solid #22d3ee;
+  outline-offset: 2px;
+}
+
+.form-hint {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #cbd5f5;
+}
+
+.dashboard-shell {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 3rem clamp(1.5rem, 4vw, 5rem);
+  background: radial-gradient(circle at 15% 20%, #34d39933, transparent 45%),
+    radial-gradient(circle at 80% 0%, #818cf833, transparent 50%),
+    #0f172a;
+  color: #f8fafc;
+}
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+}
+
+.eyebrow {
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  color: #cbd5f5;
+  margin: 0 0 0.25rem;
+}
+
+.muted {
+  color: #cbd5f566;
+}
+
+.page-tabs {
+  display: inline-flex;
+  background: rgba(15, 23, 42, 0.8);
+  border-radius: 999px;
+  border: 1px solid rgba(226, 232, 240, 0.15);
+  overflow: hidden;
+  width: fit-content;
+}
+
+.page-tabs button {
+  border: none;
+  background: transparent;
+  color: #f8fafc;
+  padding: 0.75rem 1.75rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.page-tabs button.active {
+  background: rgba(99, 102, 241, 0.25);
+}
+
+main {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.panel {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(226, 232, 240, 0.1);
+  border-radius: 1.25rem;
+  padding: 2rem;
+  box-shadow: 0 25px 45px rgba(2, 6, 23, 0.45);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.panel header h2 {
+  margin: 0;
+  font-size: 1.75rem;
+}
+
 label {
   font-weight: 600;
+  margin-bottom: 0.35rem;
 }
 
-input {
-  border-radius: 0.75rem;
-  border: 1px solid rgba(226, 232, 240, 0.2);
+input,
+select,
+textarea {
+  width: 100%;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(226, 232, 240, 0.15);
   background: rgba(15, 23, 42, 0.6);
   color: #f8fafc;
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1rem;
   font-size: 1rem;
+  font-family: inherit;
 }
 
-input:focus {
+textarea {
+  min-height: 220px;
+  font-family: 'JetBrains Mono', 'Fira Code', Menlo, monospace;
+  line-height: 1.4;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
   outline: 2px solid #22d3ee;
   border-color: transparent;
 }
@@ -121,98 +247,273 @@ button:disabled {
   cursor: not-allowed;
 }
 
+.ghost-button {
+  border: 1px solid rgba(226, 232, 240, 0.2);
+  background: transparent;
+  color: #f8fafc;
+  padding: 0.6rem 1rem;
+}
+
+.ghost-button.destructive {
+  border-color: rgba(248, 113, 113, 0.5);
+  color: #fecaca;
+}
+
+.logout-button {
+  border-radius: 999px;
+  padding: 0.65rem 1.5rem;
+  font-weight: 600;
+}
+
+.sql-console .console-body,
+.settings-panel .settings-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.control-row {
+  display: flex;
+  flex-direction: column;
+}
+
+.actions {
+  display: flex;
+  gap: 0.75rem;
+  justify-content: flex-end;
+}
+
 .form-error {
   margin: 0;
   color: #f87171;
   font-size: 0.95rem;
 }
 
-.form-hint {
+.test-status {
   margin: 0;
-  font-size: 0.9rem;
-  color: #cbd5f5;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.65rem;
+  border: 1px solid;
 }
 
-.success-card {
+.test-status.success {
+  border-color: rgba(34, 197, 94, 0.5);
+  background: rgba(34, 197, 94, 0.15);
+  color: #bbf7d0;
+}
+
+.test-status.error {
+  border-color: rgba(248, 113, 113, 0.5);
+  background: rgba(248, 113, 113, 0.15);
+  color: #fecaca;
+}
+
+.small {
+  font-size: 0.85rem;
+}
+
+.results-card {
+  border: 1px solid rgba(34, 211, 238, 0.25);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  background: rgba(15, 118, 110, 0.08);
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  background: rgba(34, 211, 238, 0.05);
-  border: 1px solid rgba(34, 211, 238, 0.2);
-  border-radius: 1rem;
-  padding: 1.5rem;
 }
 
-.success-card dl {
-  margin: 0;
-}
-
-.success-card dt {
-  font-size: 0.85rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #94a3b8;
-}
-
-.success-card dd {
-  margin: 0 0 1rem;
-  font-size: 1.1rem;
-}
-
-.auth-toggle {
+.results-meta {
   display: flex;
-  border: 1px solid rgba(226, 232, 240, 0.2);
-  border-radius: 999px;
-  overflow: hidden;
-  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
+  font-size: 0.95rem;
 }
 
-.auth-toggle button {
-  flex: 1;
-  background: transparent;
-  padding: 0.65rem 1rem;
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+table th,
+table td {
+  border: 1px solid rgba(226, 232, 240, 0.15);
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+}
+
+table th {
+  background: rgba(15, 23, 42, 0.75);
   font-weight: 600;
-  border-radius: 0;
 }
 
-.auth-toggle button.active {
-  background: rgba(99, 102, 241, 0.3);
+.new-connection {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.text-button {
-  background: none;
-  border: none;
-  color: #22d3ee;
-  font: inherit;
+.field-hint {
+  margin: 0.25rem 0 0;
+  font-size: 0.85rem;
+  color: #cbd5f5;
+}
+
+.connection-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.connection-list header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.connection-list ul {
+  list-style: none;
+  margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.connection-list li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(226, 232, 240, 0.12);
+  border-radius: 0.85rem;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.connection-list li div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.connection-list li span {
+  font-family: 'JetBrains Mono', Menlo, monospace;
+  font-size: 0.85rem;
+  color: #cbd5f5;
+  overflow-wrap: anywhere;
+}
+
+.connection-list li small {
+  color: #cbd5f588;
+}
+
+.connection-actions {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.connection-picker {
+  position: relative;
+}
+
+.picker-trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border-radius: 0.85rem;
+  border: 1px solid rgba(226, 232, 240, 0.15);
+  background: rgba(15, 23, 42, 0.6);
+  color: inherit;
+  padding: 0.85rem 1rem;
+  font-weight: 600;
   cursor: pointer;
 }
 
-.text-button:focus {
-  outline: 2px solid #22d3ee;
-  outline-offset: 2px;
+.picker-dropdown {
+  position: absolute;
+  top: calc(100% + 0.35rem);
+  left: 0;
+  width: min(360px, 100%);
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(226, 232, 240, 0.15);
+  border-radius: 1rem;
+  box-shadow: 0 20px 40px rgba(2, 6, 23, 0.45);
+  z-index: 10;
+  max-height: 260px;
+  overflow-y: auto;
+  padding: 0.5rem 0;
 }
 
-.form-card {
-  margin-top: 1rem;
+.picker-dropdown ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
-.submit-form label,
-.submit-form input,
-.submit-form button {
-  margin-top: 1rem;
+.picker-dropdown li button {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: none;
+  color: inherit;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  cursor: pointer;
 }
 
-.form-error {
-  margin-top: 0.5rem;
+.picker-dropdown li button.active {
+  background: rgba(99, 102, 241, 0.25);
 }
 
-@media (max-width: 640px) {
-  .app-shell {
-    padding: 2.5rem 1.25rem;
+.picker-dropdown li button span {
+  font-size: 0.85rem;
+  color: #cbd5f5;
+  font-family: 'JetBrains Mono', Menlo, monospace;
+  overflow-wrap: anywhere;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.edit-connection {
+  border: 1px solid rgba(226, 232, 240, 0.12);
+  border-radius: 1rem;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background: rgba(15, 23, 42, 0.6);
+}
+
+.edit-connection h3 {
+  margin: 0;
+}
+
+.edit-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .dashboard-shell {
+    padding: 2rem 1.5rem;
   }
 
-  .auth-panel {
-    padding: 1.5rem;
+  main {
+    grid-template-columns: 1fr;
   }
 }
