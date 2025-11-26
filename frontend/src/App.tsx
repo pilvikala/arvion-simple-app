@@ -21,6 +21,7 @@ import {
 } from './api/client'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
+import convertToCsv from 'json-2-csv';
 
 type Page = 'sql' | 'settings'
 type AuthMode = 'login' | 'signup'
@@ -169,6 +170,16 @@ function App() {
     } catch (error) {
       alert(getErrorMessage(error))
     }
+  }
+
+  const handleDownloadResult = async () => {
+    if (!queryResult) {
+      return
+    }
+    const csv = await convertToCsv.json2csvAsync(queryResult.rows)
+    const blob = new Blob([csv], { type: 'text/csv' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank')
   }
 
   const handleRunQuery = async () => {
@@ -460,7 +471,6 @@ function App() {
           <button type="button" onClick={handleRunQuery} disabled={queryRunning}>
             {queryRunning ? 'Running...' : 'Run query'}
           </button>
-          <span className="muted small">Shortcut: Cmd/Ctrl + Enter</span>
         </div>
         {queryError && <p className="form-error">{queryError}</p>}
         {queryResult && (
@@ -508,8 +518,16 @@ function App() {
             )}
           </div>
         )}
+
       </div>
-    </div>
+      <div className="actions">
+        {queryResult && queryResult.row_count > 0 && (
+          <button type="button" onClick={handleDownloadResult} disabled={queryResult && queryResult.row_count > 0 ? false : true}>
+            Download
+          </button>
+        )}
+      </div>
+    </div >
   )
 
   const renderSettings = () => (
