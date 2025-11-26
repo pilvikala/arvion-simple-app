@@ -21,7 +21,9 @@ import {
 } from './api/client'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
+import SplitButton from './components/SplitButton'
 import convertToCsv from 'json-2-csv';
+import { dump as dumpYaml } from 'js-yaml';
 
 type Page = 'sql' | 'settings'
 type AuthMode = 'login' | 'signup'
@@ -172,14 +174,40 @@ function App() {
     }
   }
 
-  const handleDownloadResult = async () => {
-    if (!queryResult) {
-      return
-    }
+  const downloadCsv = async (queryResult: { rows: Record<string, unknown>[] }) => {
     const csv = await convertToCsv.json2csvAsync(queryResult.rows)
     const blob = new Blob([csv], { type: 'text/csv' })
     const url = URL.createObjectURL(blob)
     window.open(url, '_blank')
+  }
+
+  const downloadJson = async (queryResult: { rows: Record<string, unknown>[] }) => {
+    const json = JSON.stringify(queryResult.rows)
+    const blob = new Blob([json], { type: 'application/json' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank')
+  }
+
+  const downloadYaml = async (queryResult: { rows: Record<string, unknown>[] }) => {
+    const yaml = dumpYaml(queryResult.rows)
+    const blob = new Blob([yaml], { type: 'text/yaml' })
+    const url = URL.createObjectURL(blob)
+    window.open(url, '_blank')
+  }
+
+  const handleDownloadResult = async (value: string | undefined) => {
+    if (!queryResult) {
+      return
+    }
+    if (!value || value === 'csv') {
+      return downloadCsv(queryResult)
+    }
+    if (value === 'json') {
+      return downloadJson(queryResult)
+    }
+    if (value === 'yaml') {
+      return downloadYaml(queryResult)
+    }
   }
 
   const handleRunQuery = async () => {
@@ -522,9 +550,17 @@ function App() {
       </div>
       <div className="actions">
         {queryResult && queryResult.row_count > 0 && (
-          <button type="button" onClick={handleDownloadResult} disabled={queryResult && queryResult.row_count > 0 ? false : true}>
-            Download
-          </button>
+          <SplitButton
+            label="Download CSV"
+            onClick={handleDownloadResult}
+            disabled={queryResult && queryResult.row_count > 0 ? false : true}
+            defaultValue="csv"
+            options={[
+              { label: 'Download as CSV', value: 'csv' },
+              { label: 'Download as JSON', value: 'json' },
+              { label: 'Download as Yaml', value: 'yaml' },
+            ]}
+          />
         )}
       </div>
     </div >

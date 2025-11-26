@@ -284,6 +284,61 @@ button:disabled {
   justify-content: flex-end;
 }
 
+.split-button {
+  position: relative;
+  display: inline-flex;
+  align-items: stretch;
+}
+
+.split-button-main,
+.split-button-toggle {
+  border-radius: 0;
+}
+
+.split-button-main {
+  border-top-left-radius: 0.85rem;
+  border-bottom-left-radius: 0.85rem;
+  background: linear-gradient(90deg, #06b6d4, #6366f1);
+}
+
+.split-button-toggle {
+  border-top-right-radius: 0.85rem;
+  border-bottom-right-radius: 0.85rem;
+  padding-inline: 0.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid rgba(15, 23, 42, 0.6);
+  background: #6366f1;
+}
+
+.split-button-menu {
+  position: absolute;
+  top: calc(100% + 0.4rem);
+  right: 0;
+  min-width: 180px;
+  background: rgba(15, 23, 42, 0.95);
+  border: 1px solid rgba(226, 232, 240, 0.15);
+  border-radius: 0.85rem;
+  box-shadow: 0 18px 36px rgba(2, 6, 23, 0.65);
+  padding: 0.35rem 0;
+  z-index: 20;
+}
+
+.split-button-menu-item {
+  width: 100%;
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  text-align: left;
+  padding: 0.65rem 0.9rem;
+  font-size: 0.9rem;
+}
+
+.split-button-menu-item:hover {
+  background: rgba(99, 102, 241, 0.25);
+}
+
 .form-error {
   margin: 0;
   color: #f87171;
