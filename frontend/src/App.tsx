@@ -3,7 +3,6 @@ import './App.css'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
 import type { LoginResponse } from './api/client'
-import SubmitForm from './components/SubmitForm'
 
 type AuthMode = 'login' | 'signup'
 
@@ -91,7 +90,6 @@ function App() {
               </dl>
               <button onClick={handleSignOut}>Sign out</button>
             </div>
-            <div className="success-card form-card"><SubmitForm /></div>
           </>
         ) : authMode === 'login' ? (
           <LoginForm onSuccess={setAuthState} onSwitchMode={() => handleModeChange('signup')} />
