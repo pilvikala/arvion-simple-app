@@ -193,6 +193,20 @@ button:disabled {
   outline-offset: 2px;
 }
 
+.form-card {
+  margin-top: 1rem;
+}
+
+.submit-form label,
+.submit-form input,
+.submit-form button {
+  margin-top: 1rem;
+}
+
+.form-error {
+  margin-top: 0.5rem;
+}
+
 @media (max-width: 640px) {
   .app-shell {
     padding: 2.5rem 1.25rem;

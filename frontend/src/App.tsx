@@ -3,6 +3,7 @@ import './App.css'
 import LoginForm from './components/LoginForm'
 import RegisterForm from './components/RegisterForm'
 import type { LoginResponse } from './api/client'
+import SubmitForm from './components/SubmitForm'
 
 type AuthMode = 'login' | 'signup'
 
@@ -75,20 +76,23 @@ function App() {
         )}
 
         {authState ? (
-          <div className="success-card">
-            <p>{authState.message}</p>
-            <dl>
-              <div>
-                <dt>Email</dt>
-                <dd>{authState.user.email}</dd>
-              </div>
-              <div>
-                <dt>Account created</dt>
-                <dd>{new Date(authState.user.created_at).toLocaleString()}</dd>
-              </div>
-            </dl>
-            <button onClick={handleSignOut}>Sign out</button>
-          </div>
+          <>
+            <div className="success-card">
+              <p>{authState.message}</p>
+              <dl>
+                <div>
+                  <dt>Email</dt>
+                  <dd>{authState.user.email}</dd>
+                </div>
+                <div>
+                  <dt>Account created</dt>
+                  <dd>{new Date(authState.user.created_at).toLocaleString()}</dd>
+                </div>
+              </dl>
+              <button onClick={handleSignOut}>Sign out</button>
+            </div>
+            <div className="success-card form-card"><SubmitForm /></div>
+          </>
         ) : authMode === 'login' ? (
           <LoginForm onSuccess={setAuthState} onSwitchMode={() => handleModeChange('signup')} />
         ) : (

@@ -29,6 +29,10 @@ def on_startup() -> None:
 def health_check() -> dict[str, str]:
     return {"status": "ok"}
 
+@app.post("/submit")
+def submit_form(form: schemas.SubmitForm, db: Session = Depends(get_db)):
+    print(form)
+    return {"message": "Form submitted successfully"}
 
 @app.post("/auth/register", response_model=schemas.UserRead, status_code=status.HTTP_201_CREATED)
 def register_user(user_in: schemas.UserCreate, db: Session = Depends(get_db)):

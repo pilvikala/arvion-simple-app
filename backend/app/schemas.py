@@ -29,3 +29,6 @@ class LoginRequest(BaseModel):
 class LoginResponse(BaseModel):
     message: str
     user: UserRead
+
+class SubmitForm(BaseModel):
+    title: str
